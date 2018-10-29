@@ -6,12 +6,15 @@ services:
             - JAVA_OPTS=-Xms1024M -Xmx1024M
         ports:
             - 8080:8080
-        links:
-            - db
         depends_on:
             - db
         volumes:
             - app_logs:/usr/local/tomcat/logs
+        command: >
+            /bin/bash -c "
+            sleep 10;
+            catalina.sh run;
+            "
 
     db:
         image: mysql:5.7.23
